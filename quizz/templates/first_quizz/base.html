@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+    <script defer src="/static/js/bootstrap.bundle.min.js"></script>
+    <title>
+        {% block title %}
+        {% endblock title %}
+    </title>
 </head>
 <body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3">
+            Здесь рисунок
+            {# <img src="{% static 'images/quizz.png' %}"> #}
+        </div>
+        <div class="col-6 bg-light text-center text-primary fw-bold">
+            Тесты и викторины на любой вкус и цвет
+        </div>
+        <div class="col-3">
+            Здесь рисунок
+            {# <img src="{% static 'images/quizz_reverse.png' %}"> #}
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
 
+    {% block content %}
+    {% endblock content%}
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-3 text-center fs-8" >
+            Все права защищены.
+        </div>
+        <div class="col-6 text-center fw-bold">
+            ООО "Флексибейс"
+        </div>
+        <div class="col-3 text-center fs-8" >
+            г. Москва
+        </div>
+    </div>
+</div>
 </body>
 </html>
