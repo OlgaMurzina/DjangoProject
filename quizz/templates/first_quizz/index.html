@@ -2,16 +2,44 @@
 
 {% block content %}
 <div class="container-fluid bg-light">
-
+    <div class="row py-auto">
+        <div class="col-2 text-center border border-2 rounded-3 bg-warning">
+            <p class="display-10 fw-bold"> Номер п/п </p>
+        </div>
+        <div class="col-10 text-center border border-2 rounded-3 bg-warning">
+            <p class="display-10 fw-bold"> Категория </p>
+        </div>
+    </div>
     {% for theme in themes %}
     <div class="row">
-        <div class="col-2 text-center border border-2 rounded-3">
+        <div class="col-2 text-center border border-2 rounded-3 ">
             {{ theme.0 }}
         </div>
-        <div class="col-10 text-center border border-2 rounded-3">
+        <div class="col-10 text-center border border-2 rounded-3 ">
             {{ theme.1 }}
         </div>
     </div>
     {% endfor %}
+</div>
+
+<div class="container-fluid bg-light m-5">
+    <div class="row bg-info text-center m-5">
+        <p>Год в виде четырех цифр - <b>Y</b> - {% now "Y" %}</p>
+        <p>Год в виде последних двух цифр - <b>y</b> - {% now "y" %}</p>
+        <p>Полное название месяца - <b>F</b> - {% now "F" %}</p>
+        <p>Сокращенное название месяца - <b>M</b> - {% now "M" %}</p>
+        <p>Номер месяца, с ведущим нулём - <b>m</b> - {% now "m" %}</p>
+        <p>Номер месяца, без ведущего нуля - <b>n</b> - {% now "n" %}</p>
+        <p>Аббревиатура месяца - <b>N</b> - {% now "N" %}</p>
+        <p>День месяца, с ведущим нулём - <b>d</b> - {% now "d" %}</p>
+        <p>День месяца, без ведущего нуля - <b>j</b> - {% now "j" %}</p>
+        <p>День недели - текст - <b>l</b> - {% now "l" %}</p>
+        <p>Часы (0-12) - <b>h</b> - {% now "h" %}</p>
+        <p>Часы (0-24) - <b>H</b> - {% now "H" %}</p>
+        <p>Минуты (0-59) - <b>i</b> - {% now "i" %}</p>
+        <p>Секунды (0-59) - <b>s</b> - {% now "s" %}</p>
+        <p>Дата (день/месяц/год) - <b>j/m/Y</b> - {% now "j/m/Y" %}</p>
+        <p>Время (час:мин:сек) - <b>H:i:s</b> - {% now "H:i:s" %}</p>
+    </div>
 </div>
 {% endblock content %}
