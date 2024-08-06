@@ -90,7 +90,7 @@ class QuizQuestion(models.Model):
     """
     Класс вопросов
     """
-    # тест, к которому относится вопрос
+    # тест/тесты, к которым относится вопрос (один вопрос может относиться к одному или нескольким тестам и наоборот)
     test = models.ManyToManyField(QuizTest)
     # автор вопроса (related_name - имя обратной связи, от User к question)
     author = models.ForeignKey(User,
@@ -106,9 +106,9 @@ class QuizQuestion(models.Model):
     opt_2 = models.CharField(max_length=200)
     opt_3 = models.CharField(max_length=200)
     opt_4 = models.CharField(max_length=200)
-    #
+    # уровень вопроса - начальный, средний, сложный
     level = models.CharField(max_length=100)
-    # временной лимит для ответа на вопрос
+    # временной лимит для ответа на вопрос, по умолчанию 30 с
     time_limit = models.IntegerField(default=30)
     # правильный ответ/ответы
     right_opt = models.CharField(max_length=100)
