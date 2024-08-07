@@ -10,6 +10,19 @@ class Status(models.TextChoices):
     DRAFT = 'DF', 'Draft'
     PUBLISHED = 'PB', 'Published'
 
+
+# конкретно-прикладные менеджеры для классов модели данных
+# отбирают данные по статусу ОПУБЛИКОВАН
+class PublishedManager(models.Manager):
+    """
+    Конкретно-прикладной менеджер
+    """
+
+    def get_queryset(self):
+        return super().get_queryset() \
+            .filter(status=Status.PUBLISHED)
+
+
 class QuizCategory(models.Model):
     """
     Класс категорий - крупные темы для объединения тестов по схожей тематике
@@ -24,7 +37,7 @@ class QuizCategory(models.Model):
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='first_quizz_quizcategory',
-                               default=1,)
+                               default=1, )
     # дата-время публикации
     publish = models.DateTimeField(default=timezone.now)
     # дата-время создания
@@ -33,6 +46,12 @@ class QuizCategory(models.Model):
     updated = models.DateTimeField(auto_now=True)
     # статус категории - черновик или опубликована
     status = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT)
+
+    # подключение менеджеров
+    # менеджер, применяемый по умолчанию
+    objects = models.Manager()
+    # конкретно-прикладной менеджер
+    published = PublishedManager()
 
     class Meta:
         """
@@ -46,6 +65,7 @@ class QuizCategory(models.Model):
     def __str__(self):
         return self.title
 
+
 class QuizTest(models.Model):
     """
     Класс Тест - конкретный тест в обозначенной категории.
@@ -58,7 +78,7 @@ class QuizTest(models.Model):
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='first_quizz_quiztest',
-                               default=1,)
+                               default=1, )
     # описание теста
     detail = models.TextField()
     # рисунок для иллюстрации теста
@@ -74,6 +94,12 @@ class QuizTest(models.Model):
     # статус теста - черновик или опубликован
     status = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT)
 
+    # подключение менеджеров
+    # менеджер, применяемый по умолчанию
+    objects = models.Manager()
+    # конкретно-прикладной менеджер
+    published = PublishedManager()
+
     class Meta:
         """
         Дополнительные внутренние настройки класса
@@ -86,6 +112,7 @@ class QuizTest(models.Model):
     def __str__(self):
         return self.title
 
+
 class QuizQuestion(models.Model):
     """
     Класс вопросов
@@ -96,7 +123,7 @@ class QuizQuestion(models.Model):
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
                                related_name='first_quizz_quizquestion',
-                               default=1,)
+                               default=1, )
     # номер вопроса в тесте
     number = models.IntegerField(default=1)
     # текст вопроса
@@ -121,6 +148,12 @@ class QuizQuestion(models.Model):
     # статус вопроса - черновик или опубликован
     status = models.CharField(max_length=2, choices=Status.choices, default=Status.DRAFT)
 
+    # подключение менеджеров
+    # менеджер, применяемый по умолчанию
+    objects = models.Manager()
+    # конкретно-прикладной менеджер
+    published = PublishedManager()
+
     class Meta:
         """
         Дополнительные внутренние настройки класса
@@ -132,4 +165,3 @@ class QuizQuestion(models.Model):
 
     def __str__(self):
         return self.question
-
