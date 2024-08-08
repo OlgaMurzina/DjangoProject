@@ -1,17 +1,21 @@
 {% extends "base.html" %}
-{% block title %} {{category}} {% endblock title %}
+{% load static %}
+
+
+{% block title %} {{category.0}} {% endblock title %}
+
 {% block content %}
 
 <div class="container-fluid bg-light">
     <div class="row py-auto" >
-        <div class="col-2 text-center border border-2 rounded-3 bg-white ">
-            <p class="display-10 fw-bold"> Категория </p>
+        <div class="col-2 align-self-center text-center border border-2 rounded-3 bg-white ">
+            <p class="display-10 fw-bold my-5"> Категория </p>
         </div>
-        <div class="col-6 text-center border border-2 rounded-3 bg-light">
-            <p class="display-10 fw-bold"> {{ category }} </p>
+        <div class="col-6 align-self-center text-center border border-2 rounded-3 bg-light">
+            <p class="display-10 fw-bold my-5"> {{ category.0 }} </p>
         </div>
         <div class="col-4 text-center border border-2 rounded-3 bg-white ">
-            <p class="display-10 fw-bold"> Категория </p>
+            <img src="{% static category.1 %}" alt={{category.1}}>
         </div>
     </div>
     <div class="row py-auto">
@@ -36,6 +40,32 @@
         <div class="col-4 text-center border border-2 rounded-3">
             <p class="date">
                 Published {{ test.1.publish }} by {{ test.1.author }}
+            </p>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="row py-auto">
+        <div class="col-2 text-center border border-2 rounded-3 bg-warning">
+            <p class="display-10 fw-bold"> Номер п/п </p>
+        </div>
+        <div class="col-6 text-center border border-2 rounded-3 bg-warning">
+            <p class="display-10 fw-bold"> Все вопросы в данной категории </p>
+        </div>
+        <div class="col-4 text-center border border-2 rounded-3 bg-warning">
+            <p class="display-10 fw-bold"> Дата публикации, автор </p>
+        </div>
+    </div>
+    {% for question in questions %}
+    <div class="row">
+        <div class="col-2 text-center border border-2 rounded-3 ">
+            {{ question.0 }}
+        </div>
+        <div class="col-6 text-center border border-2 rounded-3 ">
+            {{ question.1.question }}
+        </div>
+        <div class="col-4 text-center border border-2 rounded-3">
+            <p class="date">
+                Published {{ question.1.publish }} by {{ question.1.author }}
             </p>
         </div>
     </div>

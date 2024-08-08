@@ -1,22 +1,29 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
-<div class="container-fluid bg-light">
+<div class="container-fluid bg-light ">
     <div class="row py-auto">
-        <div class="col-2 text-center border border-2 rounded-3 bg-warning">
-            <p class="display-10 fw-bold"> Номер п/п </p>
+        <div class="col-2 align-self-center text-center border border-2 rounded-3 bg-warning">
+            <p class="display-20 my-auto fw-bold"> Номер п/п </p>
         </div>
-        <div class="col-10 text-center border border-2 rounded-3 bg-warning">
-            <p class="display-10 fw-bold"> Категория </p>
+        <div class="col-8 align-self-center text-center border border-2 rounded-3 bg-warning">
+            <p class="my-auto fw-bold"> Категория </p>
+        </div>
+        <div class="col-2 align-self-center text-center border border-2 rounded-3 bg-warning">
+            <p class="display-10 my-auto fw-bold"> Картинка </p>
         </div>
     </div>
     {% for theme in themes %}
-    <div class="row">
-        <div class="col-2 text-center border border-2 rounded-3 ">
-            {{ theme.0 }}
+    <div class="row ">
+        <div class="col-2 align-self-center  text-center border border-2 rounded-3">
+            <p class="display-10 my-5">{{ theme.0 }}</p>
         </div>
-        <div class="col-10 text-center border border-2 rounded-3 ">
-            {{ theme.1 }}
+        <div class="col-8 align-self-center text-center border border-2 rounded-3">
+            <p class="display-10 my-5">{{ theme.1 }}</p>
+        </div>
+        <div class="col-2 text-center border border-2 rounded-3">
+             <img src="{% static theme.2 %}" alt={{theme.2}}>
         </div>
     </div>
     {% endfor %}

@@ -32,7 +32,7 @@ class QuizCategory(models.Model):
     # описание категории
     detail = models.TextField()
     # рисунок для иллюстрации
-    image = models.ImageField(upload_to='cat_imgs/')
+    image = models.ImageField(upload_to='images/cat_imgs/')
     # автор категории (related_name - имя обратной связи, от User к category)
     author = models.ForeignKey(User,
                                on_delete=models.CASCADE,
@@ -82,7 +82,7 @@ class QuizTest(models.Model):
     # описание теста
     detail = models.TextField()
     # рисунок для иллюстрации теста
-    image = models.ImageField(upload_to='cat_imgs/')
+    image = models.ImageField(upload_to='images/test_imgs/')
     # выдача вопросов не по порядку номеров (по умолчанию отключена)
     random_issue = models.BooleanField(default=False)
     # дата-время публикации теста
@@ -117,6 +117,9 @@ class QuizQuestion(models.Model):
     """
     Класс вопросов
     """
+    category = models.ForeignKey(QuizCategory,
+                                 on_delete=models.CASCADE,
+                                 default=1)
     # тест/тесты, к которым относится вопрос (один вопрос может относиться к одному или нескольким тестам и наоборот)
     test = models.ManyToManyField(QuizTest)
     # автор вопроса (related_name - имя обратной связи, от User к question)
@@ -124,8 +127,6 @@ class QuizQuestion(models.Model):
                                on_delete=models.CASCADE,
                                related_name='first_quizz_quizquestion',
                                default=1, )
-    # номер вопроса в тесте
-    number = models.IntegerField(default=1)
     # текст вопроса
     question = models.TextField()
     # варианты ответа
@@ -161,7 +162,7 @@ class QuizQuestion(models.Model):
         # множественное число
         verbose_name_plural = 'Вопросы'
         # порядок сортировки по номерам вопросов
-        ordering = ['number']
+        ordering = ['id']
 
     def __str__(self):
         return self.question
