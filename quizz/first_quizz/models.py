@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from taggit.managers import TaggableManager
 
 
 class Status(models.TextChoices):
@@ -99,6 +100,8 @@ class QuizTest(models.Model):
     objects = models.Manager()
     # конкретно-прикладной менеджер
     published = PublishedManager()
+    # менеджер тегов
+    tags = TaggableManager()
 
     class Meta:
         """
@@ -154,6 +157,8 @@ class QuizQuestion(models.Model):
     objects = models.Manager()
     # конкретно-прикладной менеджер
     published = PublishedManager()
+    # менеджер тегов
+    tags = TaggableManager()
 
     class Meta:
         """
