@@ -4,8 +4,36 @@
 
 {% block title %} {{category.0}} {% endblock title %}
 
-{% block content %}
+{% block authentic %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-10 text-center fs-8">
+            {% if user.is_authenticated %}
+                Привет, {{ user.username }}!
+            {% else %}
+                <p>Вы не вошли в аккаунт!</p>
+            {% endif %}
+        </div>
+        <div class="col-2 text-center fs-8">
 
+            {% if user.is_authenticated %}
+            <p><a href="{% url 'users-profile' %}">Мой профиль</a></p>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <a href="#" onclick="parentNode.submit();">Выход</a>
+            </form>
+
+            {% else %}
+                <p><a href="{% url 'login' %}">Вход</a></p>
+                <p><a href="{% url 'password_reset' %}">Забыли пароль?</a></p>
+
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock authentic%}
+
+{% block content %}
 <div class="container-fluid bg-light">
     <div class="row py-auto">
         <div class="col-2 align-self-center text-center border border-2 rounded-3 bg-white ">
@@ -55,13 +83,13 @@
         </div>
         <div class="col-1 text-center border border-2 rounded-3">
             <p class="tags">
-            {% for tag in test.1.tags.all %}
+                {% for tag in test.1.tags.all %}
                 <a href="{% url 'quiz_test_by_tag' tag.slug %}">
                     {{ tag.name }}
                 </a>
                 {% if not forloop.last %}, {% endif %}
-            {% endfor %}
-        </p>
+                {% endfor %}
+            </p>
         </div>
     </div>
     {% endfor %}
@@ -94,13 +122,13 @@
         </div>
         <div class="col-1 text-center border border-2 rounded-3">
             <p class="tags">
-            {% for tag in question.1.tags.all %}
+                {% for tag in question.1.tags.all %}
                 <a href="{% url 'quiz_question_by_tag' tag.slug %}">
                     {{ tag.name }}
                 </a>
                 {% if not forloop.last %}, {% endif %}
-            {% endfor %}
-        </p>
+                {% endfor %}
+            </p>
         </div>
     </div>
     {% endfor %}

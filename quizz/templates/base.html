@@ -13,12 +13,19 @@
 </head>
 <body>
 <div class="container-fluid">
+    {% block authentic %}
+    {% endblock authentic %}
+    {% if messages %}
+        {% for message in messages %}
+            {{ message.tags }} {{ message }}
+        {% endfor %}
+    {% endif %}
     <div class="row">
         <div class="col-3">
             <img src="{% static 'images/quizz.png' %}">
         </div>
         <div class="col-6 my-auto bg-light text-center text-primary rounded-5">
-            <h1 class="display-1 fw-bold" >Тесты и викторины на любой вкус и цвет</h1>
+            <h1 class="display-1 fw-bold">Тесты и викторины на любой вкус и цвет</h1>
         </div>
         <div class="col-3">
             <img src="{% static 'images/quizz_reverse.png' %}">
@@ -31,13 +38,13 @@
 </div>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-3 text-center fs-8" >
+        <div class="col-3 text-center fs-8">
             All rights reserved
         </div>
         <div class="col-6 text-center fw-bold">
             ООО "JJJ"
         </div>
-        <div class="col-3 text-center fs-8" >
+        <div class="col-3 text-center fs-8">
             г. Москва
         </div>
     </div>
