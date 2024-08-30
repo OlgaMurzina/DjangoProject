@@ -17,21 +17,24 @@
             {% endif %}
         </div>
     </div>
-    <div class="row">
-        <table class="table table-bordered">
-            <form method="post">
+    <form method="post">
+        <div class="row">
+            <table class="table table-bordered">
+
                 {{form.as_table}}
                 {% csrf_token %}
-            </form>
-        </table>
-        <div class="row">
-            <p align="center"><input type="submit" value="Регистрация" class="btn btn-primary "></p>
-        </div>
-        <div class="row">
-            <div class="col12 text-center">
-                <a href="{% url 'login' %}" class="btn btn-link btn-lg active btn-block">Уже зарегистрированы? Выполните вход</a>
+            </table>
+            <div class="row">
+                <p align="center"><input type="submit" value="Регистрация" class="btn btn-primary "></p>
             </div>
         </div>
+    </form>
+    <div class="row">
+        <div class="col12 text-center">
+            <a href="{% url 'login' %}" class="btn btn-link btn-lg active btn-block">Уже зарегистрированы? Выполните
+                вход</a>
+        </div>
     </div>
+</div>
 </div>
 {% endblock content %}
